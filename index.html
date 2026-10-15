@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EVA Leads — ache empresas para vender, com o WhatsApp na mão</title>
 <meta name="description" content="O EVA Leads encontra empresas do seu público, junta os contatos com WhatsApp e te entrega uma lista pronta e priorizada para vender. Teste grátis com 30 leads, sem cartão.">
+<meta name="theme-color" content="#EBEFF6">
+<script>
+(function () {
+  var h = new Date().getHours(), auto = (h >= 18 || h < 6) ? "noite" : "dia", tema = auto;
+  try {
+    var salvo = JSON.parse(localStorage.getItem("eva-tema") || "null");
+    if (salvo && salvo.ate > Date.now() && (salvo.modo === "dia" || salvo.modo === "noite")) tema = salvo.modo;
+  } catch (e) {}
+  document.documentElement.setAttribute("data-tema", tema);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -145,6 +156,83 @@ section{padding:84px 0}
 @keyframes onda{from{transform:scale(.4);opacity:.9}to{transform:scale(4.2);opacity:0}}
 @media(prefers-reduced-motion:reduce){.mapa .onda{display:none}}
 
+/* Modo noite: tela de radar, vetores em neon sobre o espaço (inspirado nos jogos de estratégia vetoriais) */
+.alternar-tema{flex:none;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:11px;cursor:pointer;
+  background:transparent;border:1px solid var(--borda-forte);color:var(--tinta-2);position:relative}
+.alternar-tema:hover{color:var(--tinta);background:var(--branco)}
+.alternar-tema svg{width:19px;height:19px}
+.alternar-tema .sol{display:none}
+.dica-tema{position:absolute;top:calc(100% + 10px);right:0;width:240px;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.45;
+  text-align:left;font-weight:600;background:var(--branco);color:var(--tinta);border:1px solid var(--borda-forte);
+  box-shadow:var(--sombra-media);pointer-events:none}
+.dica-tema[hidden]{display:none}
+.mapa .arco{display:none}
+
+:root[data-tema="noite"]{
+  --tinta:#E6F1FF; --tinta-2:#9DB2D8; --tinta-3:#7488B2;
+  --papel:#060B1A; --branco:#0B1530; --papel-2:#0E1A3A; --borda:#192A55; --borda-forte:#29437F;
+  --marca-1:#22E4FF; --azul:#22E4FF; --azul-fundo:#8AF2FF; --ceu:#22E4FF; --ceu-suave:rgba(34,228,255,.1);
+  --sucesso:#3CFFA0; --sucesso-suave:rgba(60,255,160,.1);
+  --neon:#22E4FF; --alvo:#FF3B6B; --rastro:#FFC23D;
+  --sombra:0 0 0 1px rgba(34,228,255,.04); --sombra-media:0 0 0 1px rgba(34,228,255,.2),0 24px 60px -24px #000;
+  color-scheme:dark;
+}
+:root[data-tema="noite"] body{
+  background-color:var(--papel);
+  background-image:linear-gradient(rgba(34,228,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(34,228,255,.035) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+:root[data-tema="noite"] .alternar-tema{color:var(--neon);border-color:rgba(34,228,255,.45);box-shadow:0 0 14px -4px rgba(34,228,255,.7)}
+:root[data-tema="noite"] .alternar-tema .lua{display:none}
+:root[data-tema="noite"] .alternar-tema .sol{display:block}
+:root[data-tema="noite"] header.topo{background:rgba(6,11,26,.82)}
+:root[data-tema="noite"] .btn-primario,
+:root[data-tema="noite"] .btn-claro,
+:root[data-tema="noite"] .topo nav a.btn-primario{background:var(--neon);color:#03112A;
+  box-shadow:0 0 0 1px rgba(34,228,255,.6),0 0 26px -6px rgba(34,228,255,.85)}
+:root[data-tema="noite"] .btn-primario:hover,
+:root[data-tema="noite"] .btn-claro:hover,
+:root[data-tema="noite"] .topo nav a.btn-primario:hover{background:#8AF2FF;color:#03112A}
+:root[data-tema="noite"] .btn-vidro{background:transparent;color:#CFF8FF;border-color:rgba(34,228,255,.45)}
+:root[data-tema="noite"] .btn-vidro:hover{background:rgba(34,228,255,.1)}
+:root[data-tema="noite"] .heroi{background:
+  radial-gradient(900px 520px at 82% -8%,rgba(34,228,255,.17),transparent 62%),
+  radial-gradient(700px 420px at -5% 105%,rgba(255,59,107,.11),transparent 60%),transparent;border-bottom:1px solid var(--borda)}
+:root[data-tema="noite"] .heroi::after{background:none}
+:root[data-tema="noite"] .heroi h1{text-shadow:0 0 30px rgba(34,228,255,.28)}
+:root[data-tema="noite"] .heroi h1 .sub::after{box-shadow:0 0 14px var(--neon)}
+:root[data-tema="noite"] .heroi p.lead{color:var(--tinta-2)}
+:root[data-tema="noite"] .heroi .nota{color:var(--tinta-3)}
+:root[data-tema="noite"] .selo-heroi{background:rgba(34,228,255,.07);border-color:rgba(34,228,255,.3);color:#BDF6FF}
+:root[data-tema="noite"] .selo-heroi .ponto{background:#3CFFA0;box-shadow:0 0 8px #3CFFA0}
+:root[data-tema="noite"] .janela{border:1px solid #1F3468;transform:none;
+  box-shadow:0 0 0 1px rgba(34,228,255,.12),0 0 70px -24px rgba(34,228,255,.45),0 40px 80px -30px #000}
+:root[data-tema="noite"] .janela .barra i{background:#1F3468}
+:root[data-tema="noite"] .prio.a{background:rgba(255,59,107,.13);color:#FF7A98}
+:root[data-tema="noite"] .fundo-claro{background:rgba(11,21,48,.72)}
+:root[data-tema="noite"] .passo .n{text-shadow:0 0 10px rgba(34,228,255,.7)}
+:root[data-tema="noite"] .ben .ic{background:transparent;border:1px solid rgba(34,228,255,.5);box-shadow:0 0 18px -6px rgba(34,228,255,.8)}
+:root[data-tema="noite"] .ben .ic svg{stroke:var(--neon)}
+:root[data-tema="noite"] .faixa .n,
+:root[data-tema="noite"] .brasil .total{text-shadow:0 0 28px rgba(34,228,255,.45)}
+:root[data-tema="noite"] .marca-abre{box-shadow:0 0 10px var(--neon)}
+:root[data-tema="noite"] .cta-preco{background:var(--branco);border:1px solid rgba(34,228,255,.35);
+  box-shadow:inset 0 0 90px -30px rgba(34,228,255,.4),0 0 50px -30px rgba(34,228,255,.6)}
+:root[data-tema="noite"] .cta-preco::after{background:radial-gradient(600px 260px at 50% -30%,rgba(34,228,255,.18),transparent 60%),
+  radial-gradient(500px 240px at 50% 130%,rgba(255,59,107,.12),transparent 60%)}
+:root[data-tema="noite"] .cta-preco p{color:var(--tinta-2)}
+:root[data-tema="noite"] .ao-vivo .luz{background:var(--alvo);box-shadow:0 0 0 4px rgba(255,59,107,.15),0 0 12px var(--alvo)}
+:root[data-tema="noite"] .mapa .pontos{stroke:rgba(34,228,255,.26)}
+:root[data-tema="noite"] .mapa .contorno{stroke:var(--neon);stroke-width:1.4;filter:drop-shadow(0 0 4px rgba(34,228,255,.9))}
+:root[data-tema="noite"] .mapa .aceso{fill:var(--alvo);filter:drop-shadow(0 0 4px var(--alvo))}
+:root[data-tema="noite"] .mapa .onda{stroke:var(--alvo)}
+:root[data-tema="noite"] .mapa .arco{display:inline;fill:none;stroke:var(--rastro);stroke-width:1.6;stroke-linecap:round;
+  filter:drop-shadow(0 0 3px var(--rastro));stroke-dasharray:1;stroke-dashoffset:1;animation:rastro 2.4s ease-out forwards}
+@keyframes rastro{0%{stroke-dashoffset:1;opacity:1}45%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+:root[data-tema="noite"] footer{background:#040815;border-top:1px solid var(--borda)}
+:root[data-tema="noite"] ::selection{background:rgba(34,228,255,.35);color:#fff}
+@media(prefers-reduced-motion:reduce){:root[data-tema="noite"] .mapa .arco{display:none}}
+
 /* Download */
 .baixar{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .caixa-baixar{background:var(--branco);border:1px solid var(--borda);border-radius:var(--raio);padding:30px;box-shadow:var(--sombra)}
@@ -169,6 +257,7 @@ footer .logo b{color:#fff}
   .mapa{margin:0 auto;max-width:420px}
   .topo nav{display:none}
   .menu-topo{display:inline-flex}
+  .alternar-tema{margin-left:auto}
   section{padding:60px 0}
 }
 </style>
@@ -184,6 +273,11 @@ footer .logo b{color:#fff}
       <a href="#preco">Avaliação grátis</a>
       <a class="btn btn-primario" href="#baixar">Baixar</a>
     </nav>
+    <button class="alternar-tema" type="button" aria-label="Ligar o modo noite" title="Ligar o modo noite">
+      <svg class="lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span class="dica-tema" role="status" hidden>O modo noite liga sozinho às 18h. Toque aqui para voltar ao dia.</span>
+    </button>
     <a class="btn btn-primario menu-topo" href="#baixar">Baixar</a>
   </div>
 </header>
@@ -377,6 +471,16 @@ footer .logo b{color:#fff}
   }
   function abrir() {
     var c = sortearCidade(), p = maisPerto(c[0] + gauss() * 9, c[1] + gauss() * 9);
+    var base = CIDADES[0], dx = p[0] - base[0], dy = p[1] - base[1], dist = Math.sqrt(dx * dx + dy * dy);
+    if (!calmo && dist > 14) {
+      var arco = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      arco.setAttribute("class", "arco");
+      arco.setAttribute("pathLength", "1");
+      arco.setAttribute("d", "M" + base[0] + " " + base[1] + "Q" + ((base[0] + p[0]) / 2) + " " +
+        (Math.min(base[1], p[1]) - dist * 0.3) + " " + p[0] + " " + p[1]);
+      arco.addEventListener("animationend", function () { arco.remove(); });
+      grupo.appendChild(arco);
+    }
     grupo.appendChild(circulo("aceso", p, 3.1));
     if (!calmo) {
       var onda = circulo("onda", p, 4);
@@ -393,6 +497,52 @@ footer .logo b{color:#fff}
       if (itens[0].isIntersecting) { ligar(); obs.disconnect(); }
     }, { threshold: 0.2 }).observe(document.getElementById("brasil"));
   } else { ligar(); }
+})();
+</script>
+<script>
+// Modo noite: liga sozinho das 18h às 6h; a escolha da pessoa vale até a próxima virada (6h ou 18h).
+(function () {
+  var raiz = document.documentElement, botao = document.querySelector(".alternar-tema");
+  var dica = botao && botao.querySelector(".dica-tema"), cor = document.querySelector('meta[name="theme-color"]');
+  if (!botao) return;
+  function automatico() { var h = new Date().getHours(); return (h >= 18 || h < 6) ? "noite" : "dia"; }
+  function proximaVirada() {
+    var d = new Date(), h = d.getHours(), v = new Date(d);
+    v.setMinutes(0, 0, 0);
+    if (h < 6) v.setHours(6); else if (h < 18) v.setHours(18); else { v.setDate(v.getDate() + 1); v.setHours(6); }
+    return v.getTime();
+  }
+  function escolhido() {
+    try {
+      var s = JSON.parse(localStorage.getItem("eva-tema") || "null");
+      return s && s.ate > Date.now() ? s.modo : null;
+    } catch (e) { return null; }
+  }
+  function aplicar(tema) {
+    raiz.setAttribute("data-tema", tema);
+    var texto = tema === "noite" ? "Voltar ao modo dia" : "Ligar o modo noite";
+    botao.setAttribute("aria-label", texto);
+    botao.setAttribute("title", texto);
+    if (cor) cor.setAttribute("content", tema === "noite" ? "#060B1A" : "#EBEFF6");
+  }
+  aplicar(raiz.getAttribute("data-tema") || automatico());
+  botao.addEventListener("click", function () {
+    var novo = raiz.getAttribute("data-tema") === "noite" ? "dia" : "noite";
+    aplicar(novo);
+    if (dica) dica.hidden = true;
+    try {
+      if (novo === automatico()) localStorage.removeItem("eva-tema");
+      else localStorage.setItem("eva-tema", JSON.stringify({ modo: novo, ate: proximaVirada() }));
+    } catch (e) {}
+  });
+  // Ligou sozinho: avisa uma vez por noite onde desligar.
+  if (dica && raiz.getAttribute("data-tema") === "noite" && !escolhido()) {
+    var chave = "eva-dica-" + new Date(proximaVirada()).toDateString(), visto = false;
+    try { visto = !!localStorage.getItem(chave); localStorage.setItem(chave, "1"); } catch (e) {}
+    if (!visto) { dica.hidden = false; setTimeout(function () { dica.hidden = true; }, 7000); }
+  }
+  // Página aberta na virada (18h ou 6h): troca sozinha, se a pessoa não escolheu.
+  setInterval(function () { if (!escolhido() && raiz.getAttribute("data-tema") !== automatico()) aplicar(automatico()); }, 60000);
 })();
 </script>
 </body>
