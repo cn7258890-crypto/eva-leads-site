@@ -73,7 +73,8 @@ header.topo{position:sticky;top:0;z-index:20;background:rgba(235,239,246,.82);ba
 .selo-heroi .ponto{width:7px;height:7px;border-radius:50%;background:#7CF0B0}
 .heroi h1{font-size:clamp(34px,4.6vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.025em}
 .heroi h1 .sub{position:relative;white-space:nowrap}
-.heroi h1 .sub::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.11em;border-radius:6px;background:var(--ceu)}
+.heroi h1 .sub{text-decoration:underline;text-decoration-color:var(--ceu);text-decoration-thickness:.09em;
+  text-underline-offset:.13em;text-decoration-skip-ink:auto}
 .heroi p.lead{font-size:clamp(17px,1.5vw,20px);color:#cfddf6;margin-top:22px;max-width:36ch}
 .heroi .acoes{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
 .heroi .nota{color:#aec6ea;font-size:14px;margin-top:16px}
@@ -200,7 +201,7 @@ section{padding:84px 0}
   radial-gradient(700px 420px at -5% 105%,rgba(255,59,107,.11),transparent 60%),transparent;border-bottom:1px solid var(--borda)}
 :root[data-tema="noite"] .heroi::after{background:none}
 :root[data-tema="noite"] .heroi h1{text-shadow:0 0 30px rgba(34,228,255,.28)}
-:root[data-tema="noite"] .heroi h1 .sub::after{box-shadow:0 0 14px var(--neon)}
+:root[data-tema="noite"] .heroi h1 .sub{text-decoration-color:var(--neon)}
 :root[data-tema="noite"] .heroi p.lead{color:var(--tinta-2)}
 :root[data-tema="noite"] .heroi .nota{color:var(--tinta-3)}
 :root[data-tema="noite"] .selo-heroi{background:rgba(34,228,255,.07);border-color:rgba(34,228,255,.3);color:#BDF6FF}
