@@ -248,6 +248,11 @@ section{padding:84px 0}
 .aviso-win{background:var(--papel-2);border:1px solid var(--borda);border-radius:10px;padding:14px 16px;margin-top:20px;font-size:13.5px;color:var(--tinta-2)}
 .aviso-win b{color:var(--tinta)}
 
+.no-celular{margin-top:16px;padding:14px;border-radius:12px;background:var(--ceu-suave);font-size:14.5px;color:var(--tinta-2)}
+.no-celular p{color:var(--tinta)}
+.acoes-celular{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.acoes-celular .btn{flex:1 1 100%;padding:11px 14px;font-size:14.5px}
+
 /* Rodapé */
 footer{background:var(--tinta);color:#b9c6df;padding:48px 0}
 footer .env{display:flex;gap:30px;flex-wrap:wrap;align-items:center;justify-content:space-between}
@@ -255,6 +260,9 @@ footer a{color:#dbe6f7}
 footer .logo b{color:#fff}
 .rodape-links{display:flex;gap:24px;flex-wrap:wrap;font-size:14px}
 
+/* Celular: o exemplo do programa vira a tela de um app (sem a coluna lateral) */
+.lead > div{min-width:0}
+.lead .nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:900px){
   .heroi .env{grid-template-columns:1fr;gap:38px;padding-top:52px;padding-bottom:60px}
   .janela{transform:none;max-width:460px}
@@ -265,6 +273,28 @@ footer .logo b{color:#fff}
   .menu-topo{display:inline-flex}
   .alternar-tema{margin-left:auto}
   section{padding:60px 0}
+}
+@media(max-width:600px){
+  .env{padding:0 16px}
+  section{padding:52px 0}
+  .heroi .env{padding-top:40px;padding-bottom:48px}
+  .heroi .acoes .btn{flex:1 1 100%}
+  .janela .corpo{grid-template-columns:minmax(0,1fr)}
+  .janela .lateral{display:none}
+  .janela .painel{padding:12px}
+  .lead{padding:9px 10px;gap:8px}
+  .lead .meta{flex-wrap:wrap;row-gap:4px}
+  .prio{padding:3px 7px}
+  .brasil .total{font-size:clamp(40px,13vw,56px)}
+  .cta-preco{padding:34px 20px;border-radius:20px}
+  .cta-preco p{font-size:16.5px}
+  .cta-preco .acoes .btn{flex:1 1 100%}
+  .caixa-baixar{padding:20px}
+  .ao-vivo{padding:12px 14px}
+  .logo b{font-size:17px}
+  .topo .env{gap:12px;height:62px}
+  footer .env{flex-direction:column;align-items:flex-start;gap:20px}
+  .rodape-links{flex-direction:column;gap:12px}
 }
 </style>
 </head>
@@ -422,6 +452,13 @@ footer .logo b{color:#fff}
       </div>
       <div class="caixa-baixar">
         <a class="btn btn-primario" style="width:100%;font-size:17px;padding:16px" href="/baixar" download="EVA-Leads-instalador.exe">Baixar o EVA Leads para Windows</a>
+        <div class="no-celular" hidden>
+          <p>O EVA Leads roda no computador com Windows. Mande o link para você e baixe no computador.</p>
+          <div class="acoes-celular">
+            <a class="btn btn-fantasma" id="enviar-link" href="#" target="_blank" rel="noopener">Enviar o link pelo WhatsApp</a>
+            <button class="btn btn-fantasma" id="copiar-link" type="button">Copiar o link</button>
+          </div>
+        </div>
         <ol class="passos-inst">
           <li><span class="n">1</span><span>Clique em baixar e abra o arquivo <b>EVA-Leads-instalador.exe</b>.</span></li>
           <li><span class="n">2</span><span>Siga o assistente — leva poucos segundos e cria o atalho na área de trabalho.</span></li>
@@ -549,6 +586,23 @@ footer .logo b{color:#fff}
   }
   // Página aberta na virada (18h ou 6h): troca sozinha, se a pessoa não escolheu.
   setInterval(function () { if (!escolhido() && raiz.getAttribute("data-tema") !== automatico()) aplicar(automatico()); }, 60000);
+})();
+</script>
+<script>
+// No celular: o instalador é para Windows, então oferece mandar o link para o computador.
+(function () {
+  var caixa = document.querySelector(".no-celular");
+  if (!caixa || !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return;
+  var link = location.origin + "/#baixar";
+  caixa.hidden = false;
+  document.getElementById("enviar-link").href =
+    "https://wa.me/?text=" + encodeURIComponent("Baixar o EVA Leads no computador: " + link);
+  var copiar = document.getElementById("copiar-link");
+  copiar.addEventListener("click", function () {
+    var feito = function () { copiar.textContent = "Link copiado"; setTimeout(function () { copiar.textContent = "Copiar o link"; }, 2500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(link).then(feito, function () { prompt("Copie o link:", link); });
+    else prompt("Copie o link:", link);
+  });
 })();
 </script>
 </body>
