@@ -230,6 +230,12 @@ section{padding:84px 0}
   filter:drop-shadow(0 0 3px var(--rastro));stroke-dasharray:1;stroke-dashoffset:1;animation:rastro 2.4s ease-out forwards}
 @keyframes rastro{0%{stroke-dashoffset:1;opacity:1}45%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
 :root[data-tema="noite"] footer{background:#040815;border-top:1px solid var(--borda)}
+:root[data-tema="noite"] .logo .chip{overflow:visible;filter:drop-shadow(0 0 5px rgba(34,228,255,.75))}
+:root[data-tema="noite"] .logo .chip > rect:first-of-type{fill:#060B1A;stroke:var(--neon);stroke-width:12}
+:root[data-tema="noite"] .logo .chip > g{stroke:var(--neon)}
+:root[data-tema="noite"] .logo .chip > rect:last-of-type{fill:var(--alvo);filter:drop-shadow(0 0 6px var(--alvo))}
+:root[data-tema="noite"] .logo b,
+:root[data-tema="noite"] footer .logo b{color:#CFF8FF;text-shadow:0 0 6px rgba(34,228,255,.9),0 0 18px rgba(34,228,255,.55)}
 :root[data-tema="noite"] ::selection{background:rgba(34,228,255,.35);color:#fff}
 @media(prefers-reduced-motion:reduce){:root[data-tema="noite"] .mapa .arco{display:none}}
 
