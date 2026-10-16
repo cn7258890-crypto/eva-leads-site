@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade — EVA Leads</title>
+<meta name="description" content="Como o EVA Leads trata os seus dados: o que é coletado, para quê, com quem é compartilhado e como exercer os seus direitos pela LGPD.">
+<script>
+(function () {
+  var h = new Date().getHours(), tema = (h >= 18 || h < 6) ? "noite" : "dia";
+  try {
+    var salvo = JSON.parse(localStorage.getItem("eva-tema") || "null");
+    if (salvo && salvo.ate > Date.now() && (salvo.modo === "dia" || salvo.modo === "noite")) tema = salvo.modo;
+  } catch (e) {}
+  document.documentElement.setAttribute("data-tema", tema);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#0D1B36; --tinta-2:#46567A; --tinta-3:#64748E; --papel:#EBEFF6; --branco:#fff; --borda:#DCE3F0;
+  --azul:#2159CE; --ceu:#3EA0FF; --fonte:"Manrope",system-ui,"Segoe UI",sans-serif;
+}
+:root[data-tema="noite"]{
+  --tinta:#E6F1FF; --tinta-2:#9DB2D8; --tinta-3:#7488B2; --papel:#060B1A; --branco:#0B1530; --borda:#192A55;
+  --azul:#22E4FF; --ceu:#22E4FF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--fonte);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--azul)}
+:focus-visible{outline:3px solid var(--ceu);outline-offset:3px;border-radius:4px}
+header{border-bottom:1px solid var(--borda)}
+.env{max-width:760px;margin:0 auto;padding:0 20px}
+header .env{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;color:var(--tinta);text-decoration:none;font-size:18px}
+.logo svg{width:30px;height:30px}
+main{padding:48px 0 72px}
+h1{font-size:clamp(30px,4vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0}
+.atualizada{color:var(--tinta-3);font-size:14px;margin:10px 0 0}
+.intro{font-size:18px;color:var(--tinta-2);margin:24px 0 8px;max-width:62ch}
+h2{font-size:20px;letter-spacing:-.01em;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--borda)}
+p,li{max-width:68ch}
+ul{padding-left:20px}
+li{margin:6px 0}
+.caixa{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:18px 20px;margin-top:16px}
+footer{border-top:1px solid var(--borda);padding:28px 0;color:var(--tinta-3);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="env">
+    <a class="logo" href="/"><svg viewBox="0 0 256 256" aria-hidden="true"><rect x="6" y="6" width="244" height="244" rx="54" fill="#24489b"/><g fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M98 74 H66 V150 H98 M66 112 H92"/><path d="M106 74 L126 150 L146 74"/><path d="M154 150 L172 74 L190 150 M161 126 H183"/></g><rect x="86" y="172" width="84" height="12" rx="6" fill="#8CC9FF"/></svg>EVA Leads</a>
+    <a href="/">Voltar ao site</a>
+  </div>
+</header>
+<main>
+  <div class="env">
+    <h1>Política de Privacidade</h1>
+    <p class="atualizada">Atualizada em 16 de outubro de 2026</p>
+    <p class="intro">O EVA Leads é um programa para Windows que ajuda empresas a encontrar outras empresas para vender. Esta página explica, sem rodeios, quais dados o programa usa, para quê, com quem eles são compartilhados e como você exerce os seus direitos pela Lei Geral de Proteção de Dados (LGPD).</p>
+
+    <h2>Quem cuida dos dados</h2>
+    <p>O controlador dos dados é o EVA Leads. Para qualquer pedido sobre os seus dados, fale com a gente pelo e-mail <a href="mailto:cn7258890@gmail.com">cn7258890@gmail.com</a> ou pelo WhatsApp <a href="https://wa.me/5511985058776">(11) 98505-8776</a>.</p>
+
+    <h2>O que fica só no seu computador</h2>
+    <p>Os leads que você encontra, as suas anotações, os resultados dos contatos e as configurações ficam guardados no seu computador. A chave de acesso é guardada cifrada com a sua conta do Windows. Nada disso é enviado para nós, com uma exceção: os leads que você marca como úteis (veja abaixo).</p>
+
+    <h2>O que o programa envia ao nosso servidor, e por quê</h2>
+    <ul>
+      <li><strong>Chave de acesso e uso do plano.</strong> A cada abertura, o programa confere a chave e conta o uso das cotas do seu plano. Base legal: execução do contrato (LGPD, art. 7º, V).</li>
+      <li><strong>Identificador do computador e endereço de rede.</strong> Servem para impedir que a avaliação grátis seja usada várias vezes no mesmo computador e para proteger a sua chave. Os dois ficam guardados apenas cifrados, de forma que não é possível recuperar o original. Base legal: legítimo interesse de prevenção a fraudes (art. 7º, IX).</li>
+      <li><strong>Dados da assinatura.</strong> Quando você assina pelo programa: nome, WhatsApp e, se quiser, e-mail. Usamos para gerar o Pix, identificar o pagamento, avisar sobre a renovação e dar suporte. Base legal: execução do contrato (art. 7º, V).</li>
+      <li><strong>Leads que você marca como úteis.</strong> Quando você avalia um lead como Excelente ou Bom, ou registra o contato como Interessado ou Virou cliente, os dados públicos daquela empresa (CNPJ, site, telefones publicados e o resumo do site) vão para o nosso banco e podem ser entregues a outros usuários que fizerem a mesma busca. Nada que identifique você, os seus clientes ou as suas anotações é enviado.</li>
+      <li><strong>Relatórios de erro, só com a sua permissão.</strong> Se o programa falhar e você autorizar, enviamos informações técnicas do erro (versão, sistema, onde aconteceu), sem os seus leads.</li>
+    </ul>
+
+    <h2>Pagamentos</h2>
+    <p>O Pix é processado por uma instituição de pagamento autorizada pelo Banco Central. Nós não recebemos nem guardamos dados bancários ou de cartão: só sabemos se o pagamento foi feito e o valor.</p>
+
+    <h2>Com quem compartilhamos</h2>
+    <p>Não vendemos dados. Compartilhamos só o necessário com quem nos ajuda a prestar o serviço (a hospedagem do servidor e a instituição de pagamento) ou quando a lei exigir. Os dados públicos de empresas do banco compartilhado vão para outros usuários, como explicado acima.</p>
+
+    <h2>Por quanto tempo guardamos</h2>
+    <p>Enquanto a sua licença estiver ativa e, depois disso, pelo tempo que a lei exigir (por exemplo, os registros de pagamento, pelo prazo fiscal). O identificador cifrado do computador é guardado enquanto for útil para evitar o uso repetido da avaliação grátis.</p>
+
+    <h2>Os seus direitos</h2>
+    <p>Pela LGPD (art. 18), você pode pedir para confirmar se tratamos os seus dados, acessar, corrigir, levar para outro serviço, apagar os que não forem obrigatórios por lei e revogar consentimentos. Basta escrever para o e-mail ou WhatsApp acima: respondemos em até 15 dias.</p>
+    <div class="caixa">
+      <p><strong>Você é uma empresa que apareceu como lead?</strong> Os dados vêm de fontes públicas. Se não quiser ser contatada ou quiser a exclusão, fale com a gente pelo mesmo canal: apagamos do nosso banco, bloqueamos para não voltar e o lead some também do programa de quem já o tinha.</p>
+    </div>
+
+    <h2>Segurança</h2>
+    <p>A conversa entre o programa e o servidor é sempre criptografada (HTTPS). A chave de acesso fica cifrada no seu computador, e os dados de identificação ficam cifrados no servidor. O acesso à administração é restrito.</p>
+
+    <h2>Menores de idade</h2>
+    <p>O EVA Leads é uma ferramenta profissional, feita para empresas e não para menores de 18 anos.</p>
+
+    <h2>Mudanças nesta política</h2>
+    <p>Se mudarmos algo importante, atualizamos esta página e a data no topo. Em mudanças que afetem os seus direitos, avisamos pelo programa ou pelo WhatsApp da assinatura.</p>
+  </div>
+</main>
+<footer>
+  <div class="env">EVA Leads · <a href="/">Página inicial</a> · <a href="mailto:cn7258890@gmail.com">cn7258890@gmail.com</a></div>
+</footer>
+</body>
+</html>
