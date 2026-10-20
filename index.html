@@ -253,8 +253,6 @@ section{padding:84px 0}
 .aviso-win b{color:var(--tinta)}
 .btn-store{width:100%;font-size:17px;padding:16px}
 .btn-store svg{flex:none}
-.ou-direto{display:block;text-align:center;margin-top:12px;font-size:14.5px;color:var(--tinta-2)}
-.ou-direto a{color:var(--marca-2);font-weight:700}
 
 .no-celular{margin-top:16px;padding:14px;border-radius:12px;background:var(--ceu-suave);font-size:14.5px;color:var(--tinta-2)}
 .no-celular p{color:var(--tinta)}
@@ -455,7 +453,7 @@ footer .logo b{color:#fff}
         <h2 class="titulo-sec">Baixe e comece em 2 minutos</h2>
         <p class="sub-sec">Funciona no Windows 10 e 11. Não precisa de conhecimento técnico — instala só para você, sem pedir administrador.</p>
         <div class="aviso-win">
-          Pela <b>Microsoft Store</b>, instala e atualiza sozinho, sem aviso nenhum. No instalador direto, o Windows pode mostrar um aviso azul por ser um programa novo: é só clicar em <b>“Mais informações”</b> e depois em <b>“Executar assim mesmo”</b>.
+          Distribuído pela <b>Microsoft Store</b>: verificado pela Microsoft, instala sem aviso de segurança e se atualiza sozinho.
         </div>
       </div>
       <div class="caixa-baixar">
@@ -463,7 +461,6 @@ footer .logo b{color:#fff}
           <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="0" y="0" width="9" height="9" fill="#F25022"/><rect x="11" y="0" width="9" height="9" fill="#7FBA00"/><rect x="0" y="11" width="9" height="9" fill="#00A4EF"/><rect x="11" y="11" width="9" height="9" fill="#FFB900"/></svg>
           Baixar na Microsoft Store
         </a>
-        <span class="ou-direto">ou <a href="/baixar" download="EVA-Leads-instalador.exe">baixe o instalador direto</a></span>
         <div class="no-celular" hidden>
           <p>O EVA Leads roda no computador com Windows. Mande o link para você e baixe no computador.</p>
           <div class="acoes-celular">
@@ -472,7 +469,7 @@ footer .logo b{color:#fff}
           </div>
         </div>
         <ol class="passos-inst">
-          <li><span class="n">1</span><span>Baixe pela Microsoft Store (ou abra o <b>EVA-Leads-instalador.exe</b>, se baixou direto).</span></li>
+          <li><span class="n">1</span><span>Clique em <b>Baixar na Microsoft Store</b> e depois em <b>Instalar</b>.</span></li>
           <li><span class="n">2</span><span>A instalação leva poucos segundos e o EVA Leads aparece no menu Iniciar.</span></li>
           <li><span class="n">3</span><span>Abra o EVA Leads. Para o teste grátis de 30 leads, toque em <b>“Prefiro testar grátis primeiro”</b> e receba a sua chave pelo WhatsApp. Se já quiser assinar, é pelo próprio programa com Pix: a chave chega na hora e também por e-mail.</span></li>
         </ol>
@@ -602,7 +599,7 @@ footer .logo b{color:#fff}
 })();
 </script>
 <script>
-// No celular: o instalador é para Windows, então oferece mandar o link para o computador.
+// No celular: o programa é para Windows, então oferece mandar o link para o computador.
 (function () {
   var caixa = document.querySelector(".no-celular");
   if (!caixa || !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return;
