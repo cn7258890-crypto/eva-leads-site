@@ -132,6 +132,20 @@ section{padding:84px 0}
 .faixa .n{font-size:40px;font-weight:800;letter-spacing:-.02em;color:var(--marca-1)}
 .faixa .r{color:var(--tinta-2);font-size:15px;margin-top:4px}
 
+/* Planos e preços */
+.grupo-precos{margin-top:44px}
+.rotulo-precos{font-size:18px;font-weight:800}
+.rotulo-precos span{font-weight:600;color:var(--tinta-2)}
+.precos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:16px}
+.preco-card{background:var(--branco);border:1px solid var(--borda);border-radius:var(--raio);padding:24px;box-shadow:var(--sombra)}
+.preco-card .nome{font-weight:700;font-size:15px;color:var(--tinta-2)}
+.preco-card .valor{font-size:34px;font-weight:800;letter-spacing:-.02em;margin-top:6px;color:var(--marca-1)}
+.preco-card .valor span{font-size:15px;font-weight:600;color:var(--tinta-3);margin-left:4px;letter-spacing:0}
+.preco-card .det{color:var(--tinta-2);font-size:15px;margin-top:8px}
+.preco-card .por{display:inline-block;margin-top:14px;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;
+  background:var(--ceu-suave);color:var(--azul-fundo)}
+.nota-precos{color:var(--tinta-2);font-size:15px;margin-top:18px;max-width:70ch}
+
 /* Preço / avaliação */
 .cta-preco{background:linear-gradient(145deg,var(--marca-1),var(--marca-2));color:#fff;border-radius:24px;padding:52px;text-align:center;position:relative;overflow:hidden}
 .cta-preco::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 300px at 50% -40%,rgba(126,201,255,.3),transparent 60%);pointer-events:none;z-index:0}
@@ -272,7 +286,7 @@ footer .logo b{color:#fff}
 @media(max-width:900px){
   .heroi .env{grid-template-columns:1fr;gap:38px;padding-top:52px;padding-bottom:60px}
   .janela{transform:none;max-width:460px}
-  .passos,.grade-ben,.faixa,.baixar,.brasil{grid-template-columns:1fr}
+  .passos,.grade-ben,.faixa,.baixar,.brasil,.precos{grid-template-columns:1fr}
   .brasil{gap:36px}
   .mapa{margin:0 auto;max-width:420px}
   .topo nav{display:none}
@@ -312,6 +326,7 @@ footer .logo b{color:#fff}
     <nav>
       <a href="#como">Como funciona</a>
       <a href="#recursos">O que você leva</a>
+      <a href="#planos">Preços</a>
       <a href="#preco">Avaliação grátis</a>
       <a class="btn btn-primario" href="#baixar">Baixar</a>
     </nav>
@@ -412,6 +427,31 @@ footer .logo b{color:#fff}
       <div><div class="n">minutos</div><div class="r">para ter uma lista que levava um dia inteiro</div></div>
       <div><div class="n">30 leads</div><div class="r">de teste grátis, sem cartão e sem compromisso</div></div>
       <div><div class="n">100%</div><div class="r">dos seus leads ficam no seu computador</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <div class="env">
+    <span class="marca-abre"></span>
+    <h2 class="titulo-sec">Preço aberto, sem contrato</h2>
+    <p class="sub-sec">Você paga por Pix só o que vai usar. Prospecta todo mês? Assine. Precisa de clientes só para uma campanha? Compre um pacote avulso: sem mensalidade e sem renovação automática.</p>
+    <div class="grupo-precos">
+      <h3 class="rotulo-precos">Assinatura mensal <span>· para prospectar sempre</span></h3>
+      <div class="precos">
+        <div class="preco-card"><div class="nome">Essencial</div><div class="valor">R$ 147<span>/mês</span></div><div class="det">300 leads com contato por mês · 1 computador</div><div class="por">R$ 0,49 por lead</div></div>
+        <div class="preco-card"><div class="nome">Profissional</div><div class="valor">R$ 297<span>/mês</span></div><div class="det">1.000 leads com contato por mês · 2 computadores</div><div class="por">R$ 0,30 por lead</div></div>
+        <div class="preco-card"><div class="nome">Equipe</div><div class="valor">R$ 597<span>/mês</span></div><div class="det">3.000 leads com contato por mês · 5 computadores</div><div class="por">R$ 0,20 por lead</div></div>
+      </div>
+    </div>
+    <div class="grupo-precos">
+      <h3 class="rotulo-precos">Pacote avulso <span>· pagamento único, sem mensalidade</span></h3>
+      <div class="precos">
+        <div class="preco-card"><div class="nome">Pacote 100</div><div class="valor">R$ 59<span>único</span></div><div class="det">100 leads com contato · vale 30 dias</div><div class="por">R$ 0,59 por lead</div></div>
+        <div class="preco-card"><div class="nome">Pacote 300</div><div class="valor">R$ 179<span>único</span></div><div class="det">300 leads com contato · vale 30 dias</div><div class="por">R$ 0,60 por lead</div></div>
+        <div class="preco-card"><div class="nome">Pacote 1.000</div><div class="valor">R$ 359<span>único</span></div><div class="det">1.000 leads com contato · vale 30 dias</div><div class="por">R$ 0,36 por lead</div></div>
+      </div>
+      <p class="nota-precos">O pacote vale 30 dias a partir do pagamento. Comprou outro antes de vencer? Os leads que sobraram passam para o novo. Quando os leads acabam, o programa avisa e você compra mais ali mesmo, com Pix.</p>
     </div>
   </div>
 </section>
