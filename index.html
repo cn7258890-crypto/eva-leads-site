@@ -14,6 +14,10 @@
     if (salvo && salvo.ate > Date.now() && (salvo.modo === "dia" || salvo.modo === "noite")) tema = salvo.modo;
   } catch (e) {}
   document.documentElement.setAttribute("data-tema", tema);
+  // Títulos que saem do desfoque (ver o script no fim): só com IntersectionObserver
+  // e sem "reduzir movimento"; sem isso, eles aparecem como sempre.
+  if ("IntersectionObserver" in window && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches))
+    document.documentElement.classList.add("blur-js");
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,6 +135,14 @@ section{padding:84px 0}
 .faixa{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;text-align:center}
 .faixa .n{font-size:40px;font-weight:800;letter-spacing:-.02em;color:var(--marca-1)}
 .faixa .r{color:var(--tinta-2);font-size:15px;margin-top:4px}
+
+/* Revelação com desfoque: o título sai do borrado, palavra por palavra, ao entrar na tela */
+.blur-js [data-blur]:not(.blur-ok){opacity:0;animation:blur-seguro 0s 2.5s forwards} /* se o script falhar, aparece */
+@keyframes blur-seguro{to{opacity:1}}
+.blur-palavra{display:inline-block;opacity:0;filter:blur(12px);transform:translateY(.28em);
+  transition:opacity .75s cubic-bezier(.2,.65,.3,1),filter .75s cubic-bezier(.2,.65,.3,1),transform .75s cubic-bezier(.2,.65,.3,1);
+  transition-delay:calc(var(--i,0) * 70ms)}
+.blur-visivel .blur-palavra{opacity:1;filter:none;transform:none}
 
 /* Planos e preços */
 .grupo-precos{margin-top:44px}
@@ -343,7 +355,7 @@ footer .logo b{color:#fff}
   <div class="env">
     <div>
       <span class="selo-heroi"><span class="ponto"></span>Teste grátis com 30 leads, sem cartão</span>
-      <h1>Ache empresas para vender, com o <span class="sub">WhatsApp na mão</span>.</h1>
+      <h1 data-blur>Ache empresas para vender, com o <span class="sub">WhatsApp na mão</span>.</h1>
       <p class="lead">Diga o que você vende e onde. O EVA Leads monta uma lista de empresas do seu público, com telefone e WhatsApp, pronta para você falar hoje.</p>
       <div class="acoes">
         <a class="btn btn-claro" href="#baixar">Baixar e testar grátis</a>
@@ -378,7 +390,7 @@ footer .logo b{color:#fff}
 <section id="como">
   <div class="env">
     <span class="marca-abre"></span>
-    <h2 class="titulo-sec">Da ideia à lista pronta, em três passos</h2>
+    <h2 class="titulo-sec" data-blur>Da ideia à lista pronta, em três passos</h2>
     <p class="sub-sec">Sem planilha, sem ficar caçando contato de um em um. Você diz o alvo; o EVA Leads faz o trabalho pesado.</p>
     <div class="passos">
       <div class="passo">
@@ -403,7 +415,7 @@ footer .logo b{color:#fff}
 <section id="recursos" class="fundo-claro">
   <div class="env">
     <span class="marca-abre"></span>
-    <h2 class="titulo-sec">O que você leva em cada busca</h2>
+    <h2 class="titulo-sec" data-blur>O que você leva em cada busca</h2>
     <p class="sub-sec">Tudo pensado para você gastar o tempo falando com cliente, não procurando.</p>
     <div class="grade-ben">
       <div class="ben">
@@ -434,7 +446,7 @@ footer .logo b{color:#fff}
 <section id="planos">
   <div class="env">
     <span class="marca-abre"></span>
-    <h2 class="titulo-sec">Preço aberto, sem contrato</h2>
+    <h2 class="titulo-sec" data-blur>Preço aberto, sem contrato</h2>
     <p class="sub-sec">Você paga por Pix só o que vai usar. Prospecta todo mês? Assine. Precisa de clientes só para uma campanha? Compre um pacote avulso: sem mensalidade e sem renovação automática.</p>
     <div class="grupo-precos">
       <h3 class="rotulo-precos">Assinatura mensal <span>· para prospectar sempre</span></h3>
@@ -459,7 +471,7 @@ footer .logo b{color:#fff}
 <section id="preco">
   <div class="env">
     <div class="cta-preco">
-      <h2>Teste grátis com 30 leads. Decida vendo o resultado.</h2>
+      <h2 data-blur>Teste grátis com 30 leads. Decida vendo o resultado.</h2>
       <p>Instale, faça suas buscas e veja os leads chegarem. Sem cartão para começar.</p>
       <div class="acoes">
         <a class="btn btn-claro" href="#baixar">Baixar e começar</a>
@@ -472,7 +484,7 @@ footer .logo b{color:#fff}
 <section id="brasil" aria-labelledby="brasil-total">
   <div class="env brasil">
     <div>
-      <h2 id="brasil-total"><span class="total">25,7 milhões</span><span class="total-r" style="display:block">de empresas ativas no Brasil.</span></h2>
+      <h2 id="brasil-total"><span class="total" data-blur>25,7 milhões</span><span class="total-r" style="display:block">de empresas ativas no Brasil.</span></h2>
       <p class="texto">E o número não para: uma empresa nova abre a cada <b>6 segundos</b>. Foram 464,5 mil só em setembro de 2026. Cada uma pode ser o seu próximo cliente. O EVA Leads mostra quais combinam com o que você vende, e onde elas estão.</p>
       <p class="ao-vivo"><span class="luz" aria-hidden="true"></span><span>Cada ponto que acende no mapa é uma empresa nova, no ritmo médio do país: <b id="brasil-novas">0</b> <span id="brasil-rotulo">desde que você chegou aqui</span>.</span></p>
       <p class="fonte">Fonte: Mapa de Empresas do Governo Federal, setembro de 2026.</p>
@@ -490,7 +502,7 @@ footer .logo b{color:#fff}
     <div class="baixar">
       <div>
         <span class="marca-abre"></span>
-        <h2 class="titulo-sec">Baixe e comece em 2 minutos</h2>
+        <h2 class="titulo-sec" data-blur>Baixe e comece em 2 minutos</h2>
         <p class="sub-sec">Funciona no Windows 10 e 11. Não precisa de conhecimento técnico — instala só para você, sem pedir administrador.</p>
         <div class="aviso-win">
           Distribuído pela <b>Microsoft Store</b>: verificado pela Microsoft, instala sem aviso de segurança e se atualiza sozinho.
@@ -653,6 +665,49 @@ footer .logo b{color:#fff}
     if (navigator.clipboard) navigator.clipboard.writeText(link).then(feito, function () { prompt("Copie o link:", link); });
     else prompt("Copie o link:", link);
   });
+})();
+</script>
+<script>
+// Revelação com desfoque (como o BlurReveal): cada palavra dos elementos com
+// data-blur sai do borrado, em sequência, quando o elemento entra na tela. Um
+// destaque dentro do título (span) e a pontuação colada nele andam juntos.
+(function () {
+  if (!document.documentElement.classList.contains("blur-js")) return;
+  var alvos = document.querySelectorAll("[data-blur]");
+  Array.prototype.forEach.call(alvos, function (el) {
+    var titulo = /^H[1-6]$/.test(el.tagName), pecas = [], grupo = [];
+    function fechar() { if (grupo.length) { pecas.push(grupo); grupo = []; } }
+    Array.prototype.slice.call(el.childNodes).forEach(function (no) {
+      if (no.nodeType === 1) { grupo.push(no); return; }
+      if (no.nodeType !== 3) return;
+      no.textContent.split(/(\s+)/).forEach(function (parte) {
+        if (!parte) return;
+        if (/^\s+$/.test(parte)) { fechar(); pecas.push(parte); } else { grupo.push(document.createTextNode(parte)); }
+      });
+    });
+    fechar();
+    if (titulo) el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
+    while (el.firstChild) el.removeChild(el.firstChild);
+    var i = 0;
+    pecas.forEach(function (peca) {
+      if (typeof peca === "string") { el.appendChild(document.createTextNode(peca)); return; }
+      var palavra = document.createElement("span");
+      palavra.className = "blur-palavra";
+      palavra.style.setProperty("--i", i++);
+      if (titulo) palavra.setAttribute("aria-hidden", "true");
+      peca.forEach(function (no) { palavra.appendChild(no); });
+      el.appendChild(palavra);
+    });
+    el.classList.add("blur-ok");
+  });
+  var olho = new IntersectionObserver(function (itens) {
+    itens.forEach(function (item) {
+      if (!item.isIntersecting) return;
+      item.target.classList.add("blur-visivel");
+      olho.unobserve(item.target);
+    });
+  }, { threshold: 0.35 });
+  Array.prototype.forEach.call(alvos, function (el) { olho.observe(el); });
 })();
 </script>
 </body>
