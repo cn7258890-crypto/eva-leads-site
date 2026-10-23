@@ -14,10 +14,10 @@
     if (salvo && salvo.ate > Date.now() && (salvo.modo === "dia" || salvo.modo === "noite")) tema = salvo.modo;
   } catch (e) {}
   document.documentElement.setAttribute("data-tema", tema);
-  // Títulos que saem do desfoque (ver o script no fim): só com IntersectionObserver
-  // e sem "reduzir movimento"; sem isso, eles aparecem como sempre.
+  // Títulos que saem do desfoque e frases com marca-texto (ver o script no fim): só com
+  // IntersectionObserver e sem "reduzir movimento"; sem isso, aparecem prontos.
   if ("IntersectionObserver" in window && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches))
-    document.documentElement.classList.add("blur-js");
+    document.documentElement.classList.add("anima-js");
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +101,7 @@ header.topo{position:sticky;top:0;z-index:20;background:rgba(235,239,246,.82);ba
 .janela .painel h4{font-size:14px;margin-bottom:2px}
 .janela .painel .dica{font-size:12px;color:var(--tinta-3);margin-bottom:12px}
 .lista-lead{display:grid;gap:8px}
-.lead{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;border:1px solid var(--borda);border-radius:10px;padding:9px 11px}
+.lista-lead .lead{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;border:1px solid var(--borda);border-radius:10px;padding:9px 11px}
 .lead .nome{font-weight:700;font-size:13px}
 .lead .meta{font-size:11.5px;color:var(--tinta-3);display:flex;gap:7px;align-items:center;margin-top:2px}
 .wa{display:inline-flex;align-items:center;gap:5px;background:var(--sucesso-suave);color:var(--sucesso);font-weight:700;font-size:11px;padding:4px 9px;border-radius:999px}
@@ -137,12 +137,22 @@ section{padding:84px 0}
 .faixa .r{color:var(--tinta-2);font-size:15px;margin-top:4px}
 
 /* Revelação com desfoque: o título sai do borrado, palavra por palavra, ao entrar na tela */
-.blur-js [data-blur]:not(.blur-ok){opacity:0;animation:blur-seguro 0s 2.5s forwards} /* se o script falhar, aparece */
+.anima-js [data-blur]:not(.blur-ok){opacity:0;animation:blur-seguro 0s 2.5s forwards} /* se o script falhar, aparece */
 @keyframes blur-seguro{to{opacity:1}}
 .blur-palavra{display:inline-block;opacity:0;filter:blur(12px);transform:translateY(.28em);
   transition:opacity .75s cubic-bezier(.2,.65,.3,1),filter .75s cubic-bezier(.2,.65,.3,1),transform .75s cubic-bezier(.2,.65,.3,1);
   transition-delay:calc(var(--i,0) * 70ms)}
 .blur-visivel .blur-palavra{opacity:1;filter:none;transform:none}
+
+/* Marca-texto: a cor se desenha atrás da frase, da esquerda para a direita (como o HighlightedText) */
+:root{--destaque:rgba(62,160,255,.24)}
+.heroi,.cta-preco{--destaque:rgba(150,205,255,.24)}
+:root[data-tema="noite"],:root[data-tema="noite"] .heroi,:root[data-tema="noite"] .cta-preco{--destaque:rgba(34,228,255,.2)}
+.destaque{background-image:linear-gradient(var(--destaque),var(--destaque));background-repeat:no-repeat;
+  background-size:100% 100%;background-position:left center;border-radius:.25em;padding:0 .14em;margin:0 -.04em}
+.heroi .destaque,.cta-preco .destaque{color:#fff}
+.anima-js .destaque{background-size:0% 100%;transition:background-size 1s cubic-bezier(.65,0,.35,1) var(--atraso,0s)}
+.anima-js .destaque.destaque-visivel{background-size:100% 100%}
 
 /* Planos e preços */
 .grupo-precos{margin-top:44px}
@@ -356,7 +366,7 @@ footer .logo b{color:#fff}
     <div>
       <span class="selo-heroi"><span class="ponto"></span>Teste grátis com 30 leads, sem cartão</span>
       <h1 data-blur>Ache empresas para vender, com o <span class="sub">WhatsApp na mão</span>.</h1>
-      <p class="lead">Diga o que você vende e onde. O EVA Leads monta uma lista de empresas do seu público, com telefone e WhatsApp, pronta para você falar hoje.</p>
+      <p class="lead">Diga o que você vende e onde. O EVA Leads monta uma lista de empresas do seu público, <span class="destaque" style="--atraso:1.2s">com telefone e WhatsApp</span>, pronta para você falar hoje.</p>
       <div class="acoes">
         <a class="btn btn-claro" href="#baixar">Baixar e testar grátis</a>
         <a class="btn btn-vidro" href="#como">Ver como funciona</a>
@@ -391,7 +401,7 @@ footer .logo b{color:#fff}
   <div class="env">
     <span class="marca-abre"></span>
     <h2 class="titulo-sec" data-blur>Da ideia à lista pronta, em três passos</h2>
-    <p class="sub-sec">Sem planilha, sem ficar caçando contato de um em um. Você diz o alvo; o EVA Leads faz o trabalho pesado.</p>
+    <p class="sub-sec">Sem planilha, sem ficar caçando contato de um em um. Você diz o alvo; <span class="destaque" style="--atraso:1s">o EVA Leads faz o trabalho pesado</span>.</p>
     <div class="passos">
       <div class="passo">
         <div class="n">1</div>
@@ -416,7 +426,7 @@ footer .logo b{color:#fff}
   <div class="env">
     <span class="marca-abre"></span>
     <h2 class="titulo-sec" data-blur>O que você leva em cada busca</h2>
-    <p class="sub-sec">Tudo pensado para você gastar o tempo falando com cliente, não procurando.</p>
+    <p class="sub-sec">Tudo pensado para você gastar o tempo <span class="destaque" style="--atraso:.9s">falando com cliente</span>, não procurando.</p>
     <div class="grade-ben">
       <div class="ben">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div>
@@ -447,7 +457,7 @@ footer .logo b{color:#fff}
   <div class="env">
     <span class="marca-abre"></span>
     <h2 class="titulo-sec" data-blur>Preço aberto, sem contrato</h2>
-    <p class="sub-sec">Você paga por Pix só o que vai usar. Prospecta todo mês? Assine. Precisa de clientes só para uma campanha? Compre um pacote avulso: sem mensalidade e sem renovação automática.</p>
+    <p class="sub-sec">Você paga por Pix só o que vai usar. Prospecta todo mês? Assine. Precisa de clientes só para uma campanha? Compre um pacote avulso: <span class="destaque" style="--atraso:.8s">sem mensalidade e sem renovação automática</span>.</p>
     <div class="grupo-precos">
       <h3 class="rotulo-precos">Assinatura mensal <span>· para prospectar sempre</span></h3>
       <div class="precos">
@@ -472,7 +482,7 @@ footer .logo b{color:#fff}
   <div class="env">
     <div class="cta-preco">
       <h2 data-blur>Teste grátis com 30 leads. Decida vendo o resultado.</h2>
-      <p>Instale, faça suas buscas e veja os leads chegarem. Sem cartão para começar.</p>
+      <p>Instale, faça suas buscas e veja os leads chegarem. <span class="destaque" style="--atraso:1s">Sem cartão para começar.</span></p>
       <div class="acoes">
         <a class="btn btn-claro" href="#baixar">Baixar e começar</a>
         <a class="btn btn-vidro" href="https://wa.me/5511985058776" target="_blank" rel="noopener">Falar no WhatsApp</a>
@@ -485,7 +495,7 @@ footer .logo b{color:#fff}
   <div class="env brasil">
     <div>
       <h2 id="brasil-total"><span class="total" data-blur>25,7 milhões</span><span class="total-r" style="display:block">de empresas ativas no Brasil.</span></h2>
-      <p class="texto">E o número não para: uma empresa nova abre a cada <b>6 segundos</b>. Foram 464,5 mil só em setembro de 2026. Cada uma pode ser o seu próximo cliente. O EVA Leads mostra quais combinam com o que você vende, e onde elas estão.</p>
+      <p class="texto">E o número não para: uma empresa nova abre <span class="destaque" style="--atraso:.9s">a cada <b>6 segundos</b></span>. Foram 464,5 mil só em setembro de 2026. Cada uma pode ser o seu próximo cliente. O EVA Leads mostra quais combinam com o que você vende, e onde elas estão.</p>
       <p class="ao-vivo"><span class="luz" aria-hidden="true"></span><span>Cada ponto que acende no mapa é uma empresa nova, no ritmo médio do país: <b id="brasil-novas">0</b> <span id="brasil-rotulo">desde que você chegou aqui</span>.</span></p>
       <p class="fonte">Fonte: Mapa de Empresas do Governo Federal, setembro de 2026.</p>
     </div>
@@ -671,8 +681,10 @@ footer .logo b{color:#fff}
 // Revelação com desfoque (como o BlurReveal): cada palavra dos elementos com
 // data-blur sai do borrado, em sequência, quando o elemento entra na tela. Um
 // destaque dentro do título (span) e a pontuação colada nele andam juntos.
+// O marca-texto (.destaque, como o HighlightedText) se desenha quando a frase
+// aparece, no atraso de --atraso.
 (function () {
-  if (!document.documentElement.classList.contains("blur-js")) return;
+  if (!document.documentElement.classList.contains("anima-js")) return;
   var alvos = document.querySelectorAll("[data-blur]");
   Array.prototype.forEach.call(alvos, function (el) {
     var titulo = /^H[1-6]$/.test(el.tagName), pecas = [], grupo = [];
@@ -703,11 +715,12 @@ footer .logo b{color:#fff}
   var olho = new IntersectionObserver(function (itens) {
     itens.forEach(function (item) {
       if (!item.isIntersecting) return;
-      item.target.classList.add("blur-visivel");
+      item.target.classList.add(item.target.classList.contains("destaque") ? "destaque-visivel" : "blur-visivel");
       olho.unobserve(item.target);
     });
   }, { threshold: 0.35 });
   Array.prototype.forEach.call(alvos, function (el) { olho.observe(el); });
+  Array.prototype.forEach.call(document.querySelectorAll(".destaque"), function (el) { olho.observe(el); });
 })();
 </script>
 </body>
