@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EVA Leads — sua lista de clientes com WhatsApp em 2 minutos</title>
+<meta name="description" content="Diga o que você vende e a cidade: o EVA Leads acha as empresas do seu público, confere quem tem WhatsApp e coloca em ordem de prioridade. Teste grátis com 30 leads, sem cartão.">
+<meta name="theme-color" content="#14307C">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Página dos anúncios (/comecar?c=<canal>): uma mensagem e um botão. As
+   cores e a fonte são as do site (index.html). O canal vai nos botões da
+   Store (/ir/<canal>) e na mensagem do WhatsApp: é por ele que se sabe qual
+   anúncio trouxe cada cliente. */
+:root{
+  color-scheme:light;
+  --tinta:#0D1B36; --tinta-2:#46567A; --tinta-3:#64748E;
+  --papel:#EBEFF6; --branco:#fff; --papel-2:#F3F6FC; --borda:#DCE3F0; --borda-forte:#C2CDE1;
+  --marca-1:#14307C; --marca-2:#2E6AD2; --azul:#2159CE; --azul-fundo:#1A49AC; --ceu:#3EA0FF; --ceu-suave:#E8F1FF;
+  --sucesso:#0F7A42; --sucesso-suave:#E7F6EC;
+  --fonte:"Manrope",system-ui,"Segoe UI",sans-serif;
+  --raio:16px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--fonte);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+a{color:inherit;text-decoration:none}
+.env{max-width:1100px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--ceu);outline-offset:3px;border-radius:6px}
+
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+.logo svg{width:32px;height:32px;flex:none}
+.logo b{font-size:18px}
+header{background:var(--marca-1);color:#fff}
+header .env{display:flex;align-items:center;justify-content:space-between;height:62px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fonte);font-weight:700;
+  border-radius:11px;padding:13px 22px;cursor:pointer;border:1px solid transparent;font-size:16px;transition:transform .08s ease}
+.btn:active{transform:translateY(1px)}
+.btn-claro{background:#fff;color:var(--marca-1)}
+.btn-claro:hover{background:#eef3fb}
+.btn-vidro{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-vidro:hover{background:rgba(255,255,255,.2)}
+.btn-primario{background:var(--azul);color:#fff;box-shadow:0 8px 20px -10px rgba(33,89,206,.7)}
+.btn-primario:hover{background:var(--azul-fundo)}
+.btn-fantasma{background:transparent;color:var(--tinta);border-color:var(--borda-forte)}
+.btn-fantasma:hover{background:var(--branco)}
+header .btn{padding:9px 16px;font-size:14.5px}
+.ms{display:inline-grid;grid-template-columns:8px 8px;gap:1.5px}
+.ms i{width:8px;height:8px}
+
+/* Herói */
+.heroi{background:linear-gradient(150deg,var(--marca-1),var(--marca-2));color:#fff;overflow:hidden}
+.heroi .env{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-top:56px;padding-bottom:64px}
+.selo{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  color:#dce9ff;font-weight:600;font-size:13.5px;padding:6px 13px;border-radius:999px;margin-bottom:20px}
+.selo .ponto{width:7px;height:7px;border-radius:50%;background:#7CF0B0}
+h1{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1.06;letter-spacing:-.025em;text-wrap:balance}
+h1 em{font-style:normal;text-decoration:underline;text-decoration-color:var(--ceu);text-decoration-thickness:.09em;text-underline-offset:.13em}
+.lead{font-size:clamp(17px,1.5vw,19.5px);color:#cfddf6;margin-top:20px;max-width:40ch}
+.acoes{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.nota{color:#aec6ea;font-size:14px;margin-top:14px}
+.celular{display:none;margin-top:22px;padding:16px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22)}
+.celular p{font-size:15px;color:#e6efff}
+.celular .acoes{margin-top:12px}
+.no-celular .celular{display:block}
+.no-celular .so-pc{display:none}
+
+.tela{justify-self:center;width:min(300px,78vw);aspect-ratio:9/16;border-radius:28px;padding:8px;background:#0b1530;
+  box-shadow:0 40px 80px -30px rgba(5,15,40,.7)}
+.tela video{width:100%;height:100%;border-radius:21px;display:block;object-fit:cover;background:#0b1530}
+
+/* Seções */
+section{padding:64px 0}
+.titulo{font-size:clamp(25px,3vw,34px);font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+.sub{color:var(--tinta-2);font-size:17px;margin-top:10px;max-width:56ch}
+.branca{background:var(--branco);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda)}
+
+.publico{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.publico span{background:var(--branco);border:1px solid var(--borda);border-radius:999px;padding:9px 16px;font-weight:600;font-size:15px}
+
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:34px}
+.passo{background:var(--papel);border:1px solid var(--borda);border-radius:var(--raio);padding:24px}
+.passo .n{font-size:14px;font-weight:800;color:var(--azul);background:var(--ceu-suave);width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;margin-bottom:14px}
+.passo h3{font-size:18px}
+.passo p{color:var(--tinta-2);margin-top:6px;font-size:15.5px}
+
+.precos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.preco{background:var(--branco);border:1px solid var(--borda);border-radius:var(--raio);padding:22px}
+.preco.destaque{border-color:var(--azul);box-shadow:0 0 0 2px var(--ceu-suave)}
+.preco .nome{font-weight:700;color:var(--tinta-2)}
+.preco .valor{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+.preco .valor span{font-size:15px;font-weight:600;color:var(--tinta-3);margin-left:4px}
+.preco .det{color:var(--tinta-2);font-size:15px;margin-top:6px}
+.mais{margin-top:18px;font-size:15px;color:var(--tinta-2)}
+.mais a{color:var(--azul);font-weight:700}
+
+.perguntas{margin-top:26px;display:grid;gap:12px;max-width:780px}
+details{background:var(--papel);border:1px solid var(--borda);border-radius:12px;padding:16px 18px}
+summary{font-weight:700;cursor:pointer;font-size:16.5px}
+details p{color:var(--tinta-2);margin-top:8px;font-size:15.5px}
+
+.final{background:linear-gradient(150deg,var(--marca-1),var(--marca-2));color:#fff;text-align:center}
+.final .titulo{color:#fff}
+.final p{color:#cfddf6;margin-top:10px;font-size:17px}
+.final .acoes{justify-content:center}
+footer{padding:26px 0;color:var(--tinta-3);font-size:14px;text-align:center}
+footer a{text-decoration:underline}
+
+@media (max-width:880px){
+  .heroi .env{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:48px}
+  .passos,.precos{grid-template-columns:1fr}
+  section{padding:48px 0}
+}
+@media (max-width:420px){
+  .acoes .btn{width:100%}
+  header .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="env">
+    <span class="logo"><svg viewBox="0 0 256 256" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D3C8F"/><stop offset="1" stop-color="#3F8BE8"/></linearGradient></defs><rect x="6" y="6" width="244" height="244" rx="54" fill="url(#g)" stroke="rgba(255,255,255,.35)" stroke-width="6"/><g fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M98 74 H66 V150 H98 M66 112 H92"/><path d="M106 74 L126 150 L146 74"/><path d="M154 150 L172 74 L190 150 M161 126 H183"/></g><rect x="86" y="172" width="84" height="12" rx="6" fill="#8CC9FF"/></svg><b>EVA Leads</b></span>
+    <a class="btn btn-claro so-pc js-store" href="/ir/site">Testar grátis</a>
+  </div>
+</header>
+
+<section class="heroi" style="padding:0">
+  <div class="env">
+    <div>
+      <span class="selo"><span class="ponto"></span>Teste grátis com 30 leads, sem cartão</span>
+      <h1>Sua próxima lista de clientes, <em>com WhatsApp</em>, em 2 minutos.</h1>
+      <p class="lead">Diga o que você vende e a cidade. O EVA Leads acha as empresas do seu público, confere quem tem WhatsApp e coloca em ordem: quem vale mais a pena aparece primeiro.</p>
+      <div class="acoes so-pc">
+        <a class="btn btn-claro js-store" href="/ir/site"><span class="ms" aria-hidden="true"><i style="background:#F25022"></i><i style="background:#7FBA00"></i><i style="background:#00A4EF"></i><i style="background:#FFB900"></i></span>Baixar e testar grátis</a>
+        <a class="btn btn-vidro js-whats" href="https://wa.me/5511985058776" target="_blank" rel="noopener">Tirar dúvidas no WhatsApp</a>
+      </div>
+      <p class="nota so-pc">Microsoft Store · Windows 10 e 11 · Seus leads ficam no seu computador.</p>
+      <div class="celular">
+        <p><b>O EVA Leads é para computador com Windows.</b> Mande o link para você e instale no computador, ou fale com a gente agora.</p>
+        <div class="acoes">
+          <a class="btn btn-claro js-mandar" href="#" target="_blank" rel="noopener">Mandar o link para o meu WhatsApp</a>
+          <a class="btn btn-vidro js-whats" href="https://wa.me/5511985058776" target="_blank" rel="noopener">Falar com a gente</a>
+        </div>
+      </div>
+    </div>
+    <div class="tela">
+      <video src="midia/video-1.mp4" poster="midia/video-1-capa.jpg" autoplay muted loop playsinline preload="metadata"
+             aria-label="Vídeo: uma busca no EVA Leads, do pedido à lista pronta com WhatsApp"></video>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <h2 class="titulo">Feito para quem vende para empresas</h2>
+    <p class="sub">Se o seu cliente é um negócio, o EVA Leads encontra quem combina com você na sua cidade ou região.</p>
+    <div class="publico">
+      <span>Representantes comerciais</span><span>Agências e gestores de tráfego</span><span>Consultores</span>
+      <span>Distribuidoras e atacados</span><span>Prestadores de serviço B2B</span><span>Software para empresas</span>
+    </div>
+  </div>
+</section>
+
+<section class="branca">
+  <div class="env">
+    <h2 class="titulo">Como funciona o teste grátis</h2>
+    <div class="passos">
+      <div class="passo"><div class="n">1</div><h3>Instale pela Microsoft Store</h3><p>Leva poucos segundos e não pede administrador. Funciona no Windows 10 e 11.</p></div>
+      <div class="passo"><div class="n">2</div><h3>Peça o teste grátis</h3><p>Toque em “Prefiro testar grátis primeiro” e receba a sua chave pelo WhatsApp. Sem cartão.</p></div>
+      <div class="passo"><div class="n">3</div><h3>Faça a sua busca</h3><p>Digite o ramo e a cidade. Os 30 leads chegam com telefone, WhatsApp e prioridade.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <h2 class="titulo">Preço aberto, por Pix, sem contrato</h2>
+    <p class="sub">Prospecta todo mês? Assine. Precisa de clientes para uma campanha? Compre um pacote avulso, sem mensalidade.</p>
+    <div class="precos">
+      <div class="preco"><div class="nome">Pacote 100</div><div class="valor">R$ 59<span>único</span></div><div class="det">100 leads com contato · vale 30 dias</div></div>
+      <div class="preco destaque"><div class="nome">Essencial</div><div class="valor">R$ 147<span>/mês</span></div><div class="det">300 leads com contato por mês</div></div>
+      <div class="preco"><div class="nome">Profissional</div><div class="valor">R$ 297<span>/mês</span></div><div class="det">1.000 leads com contato por mês</div></div>
+    </div>
+    <p class="mais">Também há o plano Equipe e pacotes maiores: <a href="/#planos">ver todos os preços</a>.</p>
+  </div>
+</section>
+
+<section class="branca">
+  <div class="env">
+    <h2 class="titulo">Perguntas rápidas</h2>
+    <div class="perguntas">
+      <details><summary>Preciso de cartão para testar?</summary><p>Não. O teste grátis tem 30 leads e não pede cartão nem pagamento.</p></details>
+      <details><summary>Funciona no celular ou no Mac?</summary><p>O programa é para computador com Windows 10 ou 11. No celular, mande o link para você e instale no computador.</p></details>
+      <details><summary>De onde vêm os dados?</summary><p>De dados públicos de empresas, como o cadastro nacional de CNPJ, e do que as próprias empresas publicam, como o site delas. São contatos de empresas.</p></details>
+      <details><summary>Como funciona a assinatura?</summary><p>É mês a mês, por Pix. Não pagou, não renova: não tem multa nem contrato.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="env">
+    <h2 class="titulo">Teste grátis e decida vendo o resultado</h2>
+    <p>30 leads, sem cartão. A sua primeira lista sai hoje.</p>
+    <div class="acoes so-pc"><a class="btn btn-claro js-store" href="/ir/site">Baixar e testar grátis</a></div>
+    <div class="acoes celular-final" hidden><a class="btn btn-claro js-mandar" href="#" target="_blank" rel="noopener">Mandar o link para o meu WhatsApp</a></div>
+  </div>
+</section>
+
+<footer><div class="env">EVA Leads · <a href="/">página inicial</a> · <a href="/privacidade.html">privacidade</a></div></footer>
+
+<script>
+// O canal do anúncio (?c=google, ?c=instagram...) vai nos botões da Store
+// (/ir/<canal>: a Store conta as instalações por campanha) e na mensagem do
+// WhatsApp. No celular, a página oferece mandar o link para o computador.
+(function () {
+  var canal = (new URLSearchParams(location.search).get("c") || "site").toLowerCase();
+  if (!/^[a-z0-9-]{1,30}$/.test(canal)) canal = "site";
+  document.querySelectorAll(".js-store").forEach(function (a) { a.href = "/ir/" + canal; });
+  var conversa = "Oi! Vi o EVA Leads (" + canal + ") e quero saber mais.";
+  document.querySelectorAll(".js-whats").forEach(function (a) {
+    a.href = "https://wa.me/5511985058776?text=" + encodeURIComponent(conversa);
+  });
+  var link = location.origin + "/comecar?c=" + canal;
+  document.querySelectorAll(".js-mandar").forEach(function (a) {
+    a.href = "https://wa.me/?text=" + encodeURIComponent("Instalar o EVA Leads no computador: " + link);
+  });
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+    document.documentElement.classList.add("no-celular");
+    document.querySelector(".celular-final").hidden = false;
+  }
+  // Quem pediu menos movimento: o vídeo fica parado na capa.
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var v = document.querySelector("video");
+    v.removeAttribute("autoplay"); v.pause(); v.setAttribute("controls", "");
+  }
+})();
+</script>
+</body>
+</html>
