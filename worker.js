@@ -11,13 +11,23 @@
 // (cid). O Partner Center mostra visitas e instalações por campanha: é assim
 // que se sabe qual anúncio trouxe cada cliente. A página dos anúncios
 // (/comecar?c=<canal>) usa esses links.
+//
+// /android é a página do app para celular (android.html). /android/baixar e
+// /apk levam ao APK mais novo, que fica no servidor ao lado do app (o app
+// instalado se atualiza sozinho por lá). /usar abre o app no navegador
+// (iPhone ou quem não quer instalar).
 const STORE = "https://apps.microsoft.com/detail/9PFHQKHCTHXW?hl=pt-BR&gl=BR";
 const ROTAS = new Set(["/baixar", "/EVA-Leads-instalador.exe"]);
 const CANAL = /^\/ir\/([a-z0-9-]{1,30})\/?$/;
+const APP = "https://vps72002.publiccloud.com.br/app/";
+const APK = APP + "eva-leads.apk";
+const ATALHOS = { "/android/baixar": APK, "/apk": APK, "/usar": APP };
 
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
+    const atalho = ATALHOS[pathname.replace(/\/$/, "")];
+    if (atalho) return Response.redirect(atalho, 302);
     const canal = CANAL.exec(pathname);
     if (canal) return Response.redirect(`${STORE}&cid=${canal[1]}`, 302);
     if (!ROTAS.has(pathname)) return env.ASSETS.fetch(request);
